@@ -13,13 +13,6 @@ data = data[1:]
 # print(header)
 
 
-# since all the values in the csv are strings we'll create a function that converts strings to integers
-
-def convert_string(string):
-    for v in string:
-        string = int(string)
-    return string
-
 # a function that extracts entire columns for us
 def extract(index):
     column = []
@@ -28,12 +21,26 @@ def extract(index):
         column.append(col)
     return column
 
-teams = extract(0)
-print(teams)
+qb_ppg = extract(2)
+# print(qb_ppg)
 
+# function that converts extracted string values to floats and then integers
+def convert_to_int(a_list):
+    converted = []
+    for v in a_list:
+        v = float(v)
+        if type(v) == float:
+            v = int(v)
+        converted.append(v)
+    return converted
+
+# print(convert_to_int(qb_ppg))
+
+# function that combines both extract and convert_to_int function just pass in the index you want to extract and an int list of the values will be returned
 def extract_and_convert(index):
     column = extract(index)
-    conversion = convert_string(column)
+    conversion = convert_to_int(column)
     return conversion
 
 print(extract_and_convert(2))
+print(extract_and_convert(3))
